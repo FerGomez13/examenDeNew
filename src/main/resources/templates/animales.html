@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>SAAD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="StyleSheet" href="animal.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Concert+One|Fredoka+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kreon&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id = "contenedor">
+        <A name="arriba"></A>
+        <A name="primero"><header><h1>Sistema de Adopción de Animales Domésticos</h1>
+        </header></A>
+    <nav>
+        <ul>
+            <li><a href="#primero"> Registrar</a></li>
+            <li><a href="#segundo"> Consultar</a></li>
+            <li><a href="#tercero"> Modificar</a></li>
+            <li><a href="#cuarto"> Eliminar</a></li>
+            <li><a href="#quinto"> Adoptar</a></li>
+        </ul>
+    </nav>
+    <section>
+        <center>
+            <div class="div1">
+                <br>
+                <font class="textT"><H1>REGISTRAR</H1> </font>
+                <br>
+                <form action="#" th:action="@{/createAnimales}" th:object="${animales}" method="post">
+                    <font class="textT"> Nombre: </font>
+                    <input class="input" type="text" th:field="*{nombre}" name="nombre">
+                    <font class="textT"> Tipo: </font>
+                    <select id="Lista">
+                        <font class="textM">
+                            <option value=0 >Seleccionar</option>
+                            <option value="1" th:field="*{tipo}">Perro</option>
+                            <option value="2" th:field="*{tipo}">Gato</option>
+                        </font>
+                    </select>
+                    <font class="textT"> Color: </font>
+                    <input class="input" type="color" th:field="*{color}" name="color">
+                    <font class="textT">Fecha de nacimiento: </font>
+                    <input class="inputc" type="date" th:field="*{fechaNacimiento}" name="fechanac">
+                    <br><br>
+
+                    <font class="textT"> Raza: </font>
+                    <input class="input" type="text" th:field="*{raza}" name="raza">
+                    <font class="textT">Tipo de pelaje: </font>
+                    <select id="Lista">
+                        <font class="textM">
+                            <option value=0>Seleccionar</option>
+                            <option value="1" th:field="*{pelaje}" >Corto</option>
+                            <option value="2" th:field="*{pelaje}">Largo</option>
+                            <option value="3" th:field="*{pelaje}">Rizado</option>
+                            <option value="4" th:field="*{pelaje}">Grueso</option>
+                            <option value="5" th:field="*{pelaje}">Duro</option>
+                            <option value="6" th:field="*{pelaje}">Abisinio</option>
+                            <option value="7" th:field="*{pelaje}">Bengala</option>
+                            <option value="8" th:field="*{pelaje}">Sedoso</option>
+                            <option value="8" th:field="*{pelaje}">Esfinge</option>
+                        </font>
+                    </select>
+                    <font class="textT"> Seleccionar Fotografía:</font>
+                    <input type="file" class="textT" name="adjunto" accept=".pdf,.jpg,.png">
+
+                    <br><br>
+
+                    <font class="textT"> Vacunas: </font>
+                    <font class="textM">
+                        <input class="textM" type="checkbox" id="cbox1" value="v1" th:field="*{vacunas}"> Moquillo
+                        <input class="textM" type="checkbox" id="cbox1" value="v2" th:field="*{vacunas}"> Rabia
+                        <input class="textM" type="checkbox" id="cbox1" value="v3" th:field="*{vacunas}"> Trivalente
+                        <input class="textM" type="checkbox" id="cbox1" value="v3" th:field="*{vacunas}"> Parvovirus
+                        <input class="textM" type="checkbox" id="cbox1" value="v3" th:field="*{vacunas}"> Coronavirus
+                    </font>
+
+                    <br><br>
+                    <button class="textT" id="boton" name="btnRegistrar">Registrar</button>
+                    <input type="hidden" id="id" th:field="*{id}">
+                </form>
+            </div>
+            <!-- Aqui-->
+
+
+            <A name="segundo"><div class="div2"></A>
+            <br>
+            <font class="textT"><H1>CONSULTAR</H1></font>
+            <table>
+                <thead>
+                <tr>
+                    <th>Fotografía</th><th>Id</th><th>Nombre</th><th>Tipo</th><th>Color</th><th>Fecha de Nac</th> <th>Raza</th><th>Tipo de pelaje</th><th>Vacunas</th><th>Estatus</th>
+                </tr>
+                <tr th:each="animales : ${animales}">
+                    <td th:text="${animales.id}"></td>
+                    <td th:text="*{animales.nombre}"></td>
+                    <td th:text="${animales.tipo}"></td>
+                    <td th:text="${animales.color}"></td>
+                    <td th:text="${animales.fechaNacimiento}"></td>
+                    <td th:text="${animales.raza}"></td>
+                    <td th:text="${animales.pelaje}"></td>
+                    <td th:text="${animales.vacunas}"></td>
+                    <td th:text="${animales.adopcion}"></td>
+                </thead>
+            </table>
+</div>
+<A name="tercero"><div class="div1"></A><br>
+<font class="textT"><H1>MODIFICAR</H1></font><br>
+<font class="textT"> Nombre mascota: </font>
+<input class="input" type="text" name="nombre">
+<input class="imagen" type=image src="lupa.png" width="25" height="25">
+<font class="textT"> Tipo: </font>
+<select id="Lista"><font class="textM">
+    <option value=0>Seleccionar</option>
+    <option value="1">Perro</option>
+    <option value="2">Gato</option>
+</font>
+</select>
+<font class="textT"> Color: </font>
+<input class="input" type="color" name="color">
+<font class="textT">Fecha de nacimiento: </font>
+<input class="inputc" type="date" name="fechanac">
+<br><br>
+
+<font class="textT"> Raza: </font>
+<input class="input" type="text" name="raza">
+<font class="textT">Tipo de pelaje: </font>
+<select id="Lista"><font class="textM">
+    <option value=0>Seleccionar</option>
+    <option value="1">Corto</option>
+    <option value="2">Largo</option>
+    <option value="3">Rizado</option>
+    <option value="4">Grueso</option>
+    <option value="5">Duro</option>
+    <option value="6">Abisinio</option>
+    <option value="7">Bengala</option>
+    <option value="8">Sedoso</option>
+    <option value="8">Esfinge</option>
+</font>
+</select>
+<font class="textT"> Seleccionar Fotografía:</font>
+<input type="file" class="textT" name="adjunto" accept=".pdf,.jpg,.png">
+
+<br><br>
+
+<font class="textT"> Vacunas: </font>
+<font class="textM">
+    <input class="textM" type="checkbox" id="cbox1" value="v1"> Moquillo
+    <input class="textM" type="checkbox" id="cbox1" value="v2"> Rabia
+    <input class="textM" type="checkbox" id="cbox1" value="v3"> Trivalente
+    <input class="textM" type="checkbox" id="cbox1" value="v3"> Parvovirus
+    <input class="textM" type="checkbox" id="cbox1" value="v3"> Coronavirus
+</font>  <br><br>
+<button class="textT" id="boton" name="btnModificar">Modificar</button>
+<br><br>
+
+
+</div>
+
+
+<A name="cuarto"><div class="div2"></A><br>
+<font class="textT"><H1>ELIMINAR</H1></font>
+<br>
+<font class="textT"> Nombre mascota: </font>
+<input class="input" type="text" name="nombre">
+<input class="imagen" type=image src="lupa.png" width="25" height="25">
+|<table>
+    <thead>
+    <tr>
+        <th>Fotografía</th><th>Nombre</th><th>Tipo</th><th>Color</th><th>Fecha de Nac</th> <th>Raza</th><th>Tipo de pelaje</th><th>Vacunas</th><th>Estatus</th>
+    </tr>
+    </thead>
+    <tr>
+        <td>Cui</td><td>Denis</td><td>Cuyo</td><td>Cafe</td><td>22/11/19</td><td>Fina</td><td>Lacio</td><td>Ninguna</td><td>Adoptado</td>
+
+</table>
+
+<button class="textT" id=boton name="btnEliminar">Eliminar</button>
+<br><br>
+</div>
+
+<A name="quinto"><div class="div1"></A><br>
+<font class="textT"><H1>ADOPTAR</H1></font>
+<br>
+<font class="textT"> Nombre mascota: </font>
+<input class="input" type="text" name="nombre">
+<input class="imagen" type=image src="lupa.png" width="25" height="25">
+<font class="textT"> Adoptante : </font>
+<input class="inputlarge" type="text" name="nombre">
+<button class="textT" id="boton" name="btnAdoptar">Adoptar</button>
+<br><br><br><br>
+<font class="textT">Volver <A href="#arriba">arriba</A></font>
+
+<br><br>
+
+</div>
+</center>
+</section>
+</div>
+</body>
+</html>
